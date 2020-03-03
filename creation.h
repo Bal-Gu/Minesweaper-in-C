@@ -6,5 +6,7 @@ void intermediate(int MaxX,int MaxY,char** Visited);
 void lines(int MaxX,int MaxY,char** Visited);
 void creation(int MaxX,int MaxY,char** Visited);
 
+void results(int** resultsArray);
+
 
 #endif

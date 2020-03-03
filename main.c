@@ -3,9 +3,8 @@
 
 #include "calculateMines.h"
 #include "creation.h"
-#include "mine.h"
 #include "randomfill.h"
-#include "emptybuffer.h"
+#include "emptybuff.h"
 
 
 char** createPlayerView(long x, long y){
@@ -14,9 +13,11 @@ char** createPlayerView(long x, long y){
     for(int i = 0; i < x; i++){ 
     PlayerView[i] = malloc(y * sizeof(char));
     for(int j = 0; j < y; j++){
-      PlayerView[i][j] = '\u25A0';  
+      PlayerView[i][j] = 254;  
     }
     return PlayerView;
+    
+}
     
 }
 
@@ -30,6 +31,11 @@ int** createMineField(long x, long y){
     }
     return MineField;
     
+}
+}
+void rules(){
+    //TODO
+    return;
 }
 
 
@@ -62,9 +68,9 @@ if(x*y <= minesNum){
 }
 
 rules();//TODO should print out the rules and how to play
-char** PlayerView = createPlayerView();//mallocs spaces for the PlayerView
-int** MineField = createMineField();//mallocs space for the MineField
-randomfill();//TODO in randomfill
+char** PlayerView = createPlayerView(x,y);//mallocs spaces for the PlayerView
+int** MineField = createMineField(x,y);//mallocs space for the MineField
+randomFill(minesNum,x,y,MineField);//TODO in randomfill
 int UserX;
 int UserY;
 int emptyspaces = x * y - minesNum;
@@ -72,19 +78,25 @@ char marking;
 int GameOver = 0;
 while(!GameOver){
     marking = '0';
-    creation();//TODO in creation
+    creation(x,y,PlayerView);//TODO in creation
     printf("Gives me your coordinates x y and X if you want to mark it");
-    emptybuffer();
-    scanf("%d %d %c",&UserX,&UserY,);
+    emptybuff();
+    scanf("%d %d %c",&UserX,&UserY,&marking);
     
-    if
     
-    else if(minesNum[UserX][UserY] == 1){
+    if(UserX < 0 || UserX > x || UserY < 0 || UserY > y){
+        puts("please give valid coordinates");
+    }
+    else if(marking = 'X'){
+        PlayerView[UserX][UserY] = 'X';
+    }
+    
+    else if(MineField[UserX][UserY] == 1){
         puts("You have steped on a mine");
         return 1;
     }
     else{
-        int ret = calulateMines();//TODO in CalculatesMines
+        int ret = calculateMines(UserX,UserY,MineField,PlayerView);//TODO in CalculatesMines
         emptyspaces -= ret;
         if(emptyspaces == 0){
             GameOver = 1;
@@ -93,7 +105,7 @@ while(!GameOver){
     }
 }
 
-//Decide if we print the Minefield to show where the mines where at the end? \uD83D\uDCA3
+results(MineField); //\uD83D\uDCA3 can be helpfull for bombs
 puts("Congratulation You have won");
 
 

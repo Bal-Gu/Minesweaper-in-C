@@ -1,4 +1,4 @@
-#include "mine.h"
+
 #ifndef calculate
 #define calculate
 int calculateTopRigh(int x,int y,int** Minefield);
