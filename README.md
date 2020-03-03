@@ -6,7 +6,9 @@ A makefill has been added.
 
 ## To run the programm:
 1.Open terminal where you cloned the project.
+
 2.enter make
+
 3.Now you can play with ./minesweaper {**number_of_Rows**} {**number_of_Columns**} {**number_of_Mines**}
 
 Once the programm has been compiled you don't need to do step 1 and 2.
