@@ -74,6 +74,7 @@ while(!GameOver){
     marking = '0';
     creation();//TODO in creation
     printf("Gives me your coordinates x y and X if you want to mark it");
+    emptybuffer();
     scanf("%d %d %c",&UserX,&UserY,);
     
     if
