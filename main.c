@@ -10,28 +10,28 @@
 char** createPlayerView(long x, long y){
     
     char** PlayerView = malloc(x * sizeof(char*));
-    for(int i = 0; i < x; i++){ 
+    for(int i = 0; i <= x; i++){ 
     PlayerView[i] = malloc(y * sizeof(char));
-    for(int j = 0; j < y; j++){
-      PlayerView[i][j] = 254;  
-    }
+    for(int j = 0; j <= y; j++){
+      PlayerView[i][j] = 252;  
+    }}
     return PlayerView;
     
-}
+
     
 }
 
 int** createMineField(long x, long y){
     
     int** MineField = malloc(x * sizeof(int*));
-    for(int i= 0; i < x; i++){ 
+    for(int i= 0; i <= x; i++){ 
     MineField[i] = malloc(y * sizeof(int));
-    for(int j=0; j < y ; j++){
+    for(int j=0; j <= y ; j++){
       MineField[i][j] = 0;  
-    }
+    }}
     return MineField;
     
-}
+
 }
 void rules(){
     //TODO
@@ -50,7 +50,7 @@ long x = strtol(argv[1],NULL,10);
 long y = strtol(argv[2],NULL,10);
 long minesNum = strtol(argv[3],NULL,10);
 
-printf("You have entered %lu rows, %lu columns and %lu mines\n Have fun playing ",x,y,minesNum);
+printf("You have entered %lu rows, %lu columns and %lu mines\n Have fun playing\n ",x,y,minesNum);
 
 if(x <= 0 || y <= 0){
     puts("select a bigger playground so we can have fun");
@@ -70,7 +70,7 @@ if(x*y <= minesNum){
 rules();//TODO should print out the rules and how to play
 char** PlayerView = createPlayerView(x,y);//mallocs spaces for the PlayerView
 int** MineField = createMineField(x,y);//mallocs space for the MineField
-randomFill(minesNum,x,y,MineField);//TODO in randomfill
+randomFill(minesNum,x,y,MineField);
 int UserX;
 int UserY;
 int emptyspaces = x * y - minesNum;
@@ -79,7 +79,7 @@ int GameOver = 0;
 while(!GameOver){
     marking = '0';
     creation(x,y,PlayerView);//TODO in creation
-    printf("Gives me your coordinates x y and X if you want to mark it");
+    printf("Gives me your coordinates x y and X if you want to mark it\n");
     emptybuff();
     scanf("%d %d %c",&UserX,&UserY,&marking);
     
@@ -93,7 +93,7 @@ while(!GameOver){
     
     else if(MineField[UserX][UserY] == 1){
         puts("You have steped on a mine\n");
-        results(MineField);
+        results(MineField,x,y);
         return 1;
     }
     else{
@@ -108,7 +108,7 @@ while(!GameOver){
 
 
 puts("Congratulation You have won\n");
-results(MineField); //\uD83D\uDCA3 can be helpfull for bombs
+results(MineField,x,y); 
 
 return 0;
 }

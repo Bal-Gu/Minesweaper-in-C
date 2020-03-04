@@ -3,74 +3,120 @@
 #include "creation.h"
 
 //should print the number then the top layer
-void top(int MaxX){
-    puts(" ");
-    for(int i = 0; i < MaxX; i++){
-        puts("%d ",i);
+void top(int MaxY,int check){
+    printf(" ");
+    for(int i = 0; i < MaxY; i++){
+        printf("%d ",i);
     }
-    puts("┌─");
-    for(int i = 0; i < MaxX; i++){
-        puts("┬─");
+    puts("");
+    if(check >= 10){
+        printf("  ┌─");
+        
     }
-    puts("┐\n");
+    else{
+        printf(" ┌─");
+    }
+    for(int i = 0; i < MaxY-1; i++){
+        printf("┬─");
+        if(i>=10){
+        printf("─");
+        }
+    }
+    printf("┐\n");
     return;
     
 }
 
-void bottom(int MaxX){
-    // should print the bottom layer
-    puts("└─");
-    for(int i = 0; i < MaxX; i++){
-        puts("┴─");
+// should print the bottom layer
+void bottom(int MaxY,int check){
+    if(check >= 10){
+    printf("  └─");}
+    else{
+        printf(" └─");
     }
-    puts("┘\n");
-    
-    return;
-}
-
-void intermediate(int MaxX){
-    // should print the lines between the the lines with the numbers
-    puts("├─");
-    for(int i = 0; i < MaxX; i++){
-        puts("┼─");
+    for(int i = 0; i < MaxY-1; i++){
+        printf("┴─");
+        if(i>=10){
+        printf("─");
+        }
     }
-    puts("┤\n");
+    printf("┘\n");
+    
+    return;
+}
+
+// should print the lines between the the lines with the numbers
+void intermediate(int MaxY,int check){
+    if(check >= 10){
+    printf("  ├─");}
+    else{
+        printf(" ├─");
+    }
+    for(int i = 0; i < MaxY-1; i++){
+        printf("┼─");
+        if(i>=10){
+        printf("─");
+        }
+    }
+    printf("┤\n");
     
     return;
     
 }
 
-void lines(int MaxX,int MaxY,char** Visited){
-    //TODO should print the main lines with the numbers inside of it
+//should print the lines that contains the char
+void lines(int MaxX,int MaxY,int x,char** Visited){
+    if(x>= 10){
+    printf("│");}
+    else{
+        printf(" │");
+    }
+    for(int i = 0; i < MaxY; i++){
+        printf("%c│",Visited[x][i]);
+        if(i>=10){
+        printf(" ");
+        }
+    }
+    printf("\n");
     return;
 }
 
+//should do the main logic of the creation of the file
 void creation(int MaxX,int MaxY,char** Visited){
-    //TODO should do the main logic of the creation of the file
-
+    top(MaxY,MaxX);
+    for(int i = 0; i < MaxX ; i++){
+        printf("%d",i);
+        lines(MaxX,MaxY,i,Visited);
+        if(i < MaxX-1){
+        intermediate(MaxY,MaxX);
+            
+        }
+        
+    }
+    bottom(MaxY,MaxX);
     return;
 }
 
 void results(int** resultsArray,int x,int y){
     
-    top(x);
+    top(y,x);
     
     for(int i = 0; i < x ; i++){
-        puts("│");
+        printf("│");
         for(int j = 0; j < y ; j++){
             if(resultsArray[i][j] == 1){
-            printf("\uD83D\uDCA3│");    
+            printf("\u1F4A3│");    
             }
             else{
-                puts(" │");
+                printf(" │");
             }
         
         } 
-        puts("\n");
-        intermediate(x);
+        printf("\n");
+        intermediate(y,x);
         
     }
-    bottom(x);
+    bottom(y,x);
     
     return;
 }
