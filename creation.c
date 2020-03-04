@@ -2,20 +2,40 @@
 
 #include "creation.h"
 
-
-void top(int MaxX,int MaxY){
-    //TODO should print the number then the top layer
+//should print the number then the top layer
+void top(int MaxX){
+    puts(" ");
+    for(int i = 0; i < MaxX; i++){
+        puts("%d ",i);
+    }
+    puts("┌─");
+    for(int i = 0; i < MaxX; i++){
+        puts("┬─");
+    }
+    puts("┐\n");
     return;
     
 }
 
-void bottom(int MaxX,int MaxY){
-    //TODO should print the bottom layer
+void bottom(int MaxX){
+    // should print the bottom layer
+    puts("└─");
+    for(int i = 0; i < MaxX; i++){
+        puts("┴─");
+    }
+    puts("┘\n");
+    
     return;
 }
 
-void intermediate(int MaxX,int MaxY){
-        //TODO should print the lines between the the lines with the numbers
+void intermediate(int MaxX){
+    // should print the lines between the the lines with the numbers
+    puts("├─");
+    for(int i = 0; i < MaxX; i++){
+        puts("┼─");
+    }
+    puts("┤\n");
+    
     return;
     
 }
@@ -32,13 +52,19 @@ void creation(int MaxX,int MaxY,char** Visited){
 }
 
 void results(int** resultsArray,int x,int y){
-    //TODO should print the final minefield
+    
     top(x);
     
     for(int i = 0; i < x ; i++){
         puts("│");
         for(int j = 0; j < y ; j++){
-        printf("%d│",resultsArray[i][j]);
+            if(resultsArray[i][j] == 1){
+            printf("\uD83D\uDCA3│");    
+            }
+            else{
+                puts(" │");
+            }
+        
         } 
         puts("\n");
         intermediate(x);
