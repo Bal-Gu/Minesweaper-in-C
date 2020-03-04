@@ -92,7 +92,8 @@ while(!GameOver){
     }
     
     else if(MineField[UserX][UserY] == 1){
-        puts("You have steped on a mine");
+        puts("You have steped on a mine\n");
+        results(MineField);
         return 1;
     }
     else{
@@ -105,9 +106,9 @@ while(!GameOver){
     }
 }
 
-results(MineField); //\uD83D\uDCA3 can be helpfull for bombs
-puts("Congratulation You have won");
 
+puts("Congratulation You have won\n");
+results(MineField); //\uD83D\uDCA3 can be helpfull for bombs
 
 return 0;
 }
