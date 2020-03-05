@@ -4,7 +4,8 @@
 
 //should print the number then the top layer
 void top(int MaxY,int check){
-    printf(" ");
+    
+    printf("  ");
     for(int i = 0; i < MaxY; i++){
         printf("%d ",i);
     }
@@ -68,6 +69,9 @@ void intermediate(int MaxY,int check){
 void lines(int MaxX,int MaxY,int x,char** Visited){
     if(x>= 10){
     printf("│");}
+    else if(MaxX<10){
+        printf("│");
+    }
     else{
         printf(" │");
     }
@@ -102,10 +106,10 @@ void results(int** resultsArray,int x,int y){
     top(y,x);
     
     for(int i = 0; i < x ; i++){
-        printf("│");
+        printf("%d│",i);
         for(int j = 0; j < y ; j++){
             if(resultsArray[i][j] == 1){
-            printf("\u1F4A3│");    
+            printf("x│");    
             }
             else{
                 printf(" │");
@@ -113,7 +117,10 @@ void results(int** resultsArray,int x,int y){
         
         } 
         printf("\n");
+        if(i < x-1 ){
         intermediate(y,x);
+            
+        }
         
     }
     bottom(y,x);

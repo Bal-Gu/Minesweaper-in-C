@@ -13,7 +13,7 @@ char** createPlayerView(long x, long y){
     for(int i = 0; i <= x; i++){ 
     PlayerView[i] = malloc(y * sizeof(char));
     for(int j = 0; j <= y; j++){
-      PlayerView[i][j] = 252;  
+      PlayerView[i][j] = '#';  
     }}
     return PlayerView;
     
@@ -52,13 +52,13 @@ long minesNum = strtol(argv[3],NULL,10);
 
 printf("You have entered %lu rows, %lu columns and %lu mines\n Have fun playing\n ",x,y,minesNum);
 
-if(x <= 0 || y <= 0){
+if(x <= 1 || y <= 1){
     puts("select a bigger playground so we can have fun");
     exit(1);
 }
 
-if(minesNum <= 0){
-    puts("select at least 1 or more mines");
+if(minesNum <= 1){
+    puts("select at least 2 or more mines");
     exit(1);
 }
 
@@ -76,18 +76,23 @@ int UserY;
 int emptyspaces = x * y - minesNum;
 char marking;
 int GameOver = 0;
+int* ret = malloc(sizeof(int));
 while(!GameOver){
     marking = '0';
     creation(x,y,PlayerView);//TODO in creation
-    printf("Gives me your coordinates x y and X if you want to mark it\n");
+    
+    printf("Gives me your coordinates x y .\n");
+    scanf("%d %d",&UserY,&UserX);
     emptybuff();
-    scanf("%d %d %c",&UserX,&UserY,&marking);
+    puts("Press X if you want to mark it and C for not marking it");
+    scanf("%c",&marking);
+    emptybuff();
     
     
     if(UserX < 0 || UserX > x || UserY < 0 || UserY > y){
         puts("please give valid coordinates");
     }
-    else if(marking = 'X'){
+    else if(marking == 'X'){
         PlayerView[UserX][UserY] = 'X';
     }
     
@@ -97,8 +102,9 @@ while(!GameOver){
         return 1;
     }
     else{
-        int ret = calculateMines(UserX,UserY,MineField,PlayerView);//TODO in CalculatesMines
-        emptyspaces -= ret;
+        ret[0]  = 0; 
+        calculateMines(UserX,UserY,(int)x-1,(int)y-1,MineField,PlayerView,ret);//TODO in CalculatesMines
+        emptyspaces -= ret[0];
         if(emptyspaces == 0){
             GameOver = 1;
         }
