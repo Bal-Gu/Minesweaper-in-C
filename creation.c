@@ -5,7 +5,7 @@
 //should print the number then the top layer
 void top(int MaxY,int check){
     
-    printf("  ");
+    printf(" ");
     for(int i = 0; i < MaxY; i++){
         printf("%d ",i);
     }
@@ -106,13 +106,26 @@ void results(int** resultsArray,int x,int y){
     top(y,x);
     
     for(int i = 0; i < x ; i++){
-        printf("%d│",i);
+	if(x>= 10 && i <10){
+        printf("%d │",i);}
+	else{
+	printf("%d│",i);
+	}
         for(int j = 0; j < y ; j++){
             if(resultsArray[i][j] == 1){
-            printf("x│");    
+	    	if( j <=10){
+            		printf("x│");
+		}
+		else{
+			printf(" x|");
+		}
             }
             else{
-                printf(" │");
+		if(j <=10){
+		printf(" │");
+			}
+	    	else{
+                printf("  │");}
             }
         
         } 

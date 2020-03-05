@@ -9,10 +9,10 @@
 
 char** createPlayerView(long x, long y){
     
-    char** PlayerView = malloc(x * sizeof(char*));
-    for(int i = 0; i <= x; i++){ 
-    PlayerView[i] = malloc(y * sizeof(char));
-    for(int j = 0; j <= y; j++){
+    char** PlayerView = (char**) malloc(x * sizeof(char*));
+    for(int i = 0; i < x; i++){ 
+    PlayerView[i] = (char*) malloc(y * sizeof(char));
+    for(int j = 0; j < y; j++){
       PlayerView[i][j] = '#';  
     }}
     return PlayerView;
@@ -23,10 +23,10 @@ char** createPlayerView(long x, long y){
 
 int** createMineField(long x, long y){
     
-    int** MineField = malloc(x * sizeof(int*));
-    for(int i= 0; i <= x; i++){ 
-    MineField[i] = malloc(y * sizeof(int));
-    for(int j=0; j <= y ; j++){
+    int** MineField =(int**) malloc(x * sizeof(int*));
+    for(int i= 0; i < x; i++){ 
+    MineField[i] =(int*) malloc(y * sizeof(int));
+    for(int j=0; j < y ; j++){
       MineField[i][j] = 0;  
     }}
     return MineField;
@@ -99,6 +99,21 @@ while(!GameOver){
     else if(MineField[UserX][UserY] == 1){
         puts("You have steped on a mine\n");
         results(MineField,x,y);
+	for(int i = 0; i< x; i++){
+	int* freeMe = MineField[i];
+   	 free(freeMe);
+	}
+	free(MineField);
+	for(int i = 0; i< x; i++){
+	char* freeMe = PlayerView[i];
+    	free(freeMe);
+	}
+	free(PlayerView);
+	free(ret);
+	PlayerView = NULL;
+	MineField = NULL;
+	ret = NULL;
+        
         return 1;
     }
     else{
@@ -114,7 +129,21 @@ while(!GameOver){
 
 
 puts("Congratulation You have won\n");
-results(MineField,x,y); 
-
+results(MineField,x,y);
+ 
+for(int i = 0; i< x; i++){
+int* freeMe = MineField[i];
+    free(freeMe);
+}
+free(MineField);
+for(int i = 0; i< x; i++){
+char* freeMe = PlayerView[i];
+    free(freeMe);
+}
+free(PlayerView);
+free(ret);
+PlayerView = NULL;
+MineField = NULL;
+ret = NULL;
 return 0;
 }

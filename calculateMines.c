@@ -38,7 +38,7 @@ void calculateMines(int x,int y,int MaxX,int MaxY,int** Minefield,char** Visited
     if(Minefield[x][y] == 1){
         return;
     }
-    if(x>MaxX || y>MaxX){
+    if(x>MaxX || y>MaxY){
         return;
     }
     if(Visited[x][y] == '#'){
@@ -47,8 +47,8 @@ void calculateMines(int x,int y,int MaxX,int MaxY,int** Minefield,char** Visited
     if(Visited[x][y] >= '0' && Visited[x][y] <= '9' || Visited[x][y] == ' '){
         return;
     }
-    printf("%d => %d %d=>%d\n ", x,MaxX, y,MaxY);
     int returnValue = 0;
+
     if(x == 0 && y == 0){
         returnValue = calculateTopLeft(Minefield);
         Visited[x][y] = returnValue + '0';
@@ -117,11 +117,11 @@ void calculateMines(int x,int y,int MaxX,int MaxY,int** Minefield,char** Visited
         Visited[x][y] = returnValue + '0';
         if(returnValue == 0){
         Visited[x][y] =' ';
-        calculateMines(x+1,y,MaxX,MaxY,Minefield,Visited,HowManyEmptyField);
+        calculateMines(x-1,y+1,MaxX,MaxY,Minefield,Visited,HowManyEmptyField);
         calculateMines(x-1,y,MaxX,MaxY,Minefield,Visited,HowManyEmptyField);
-        calculateMines(x+1,y-1,MaxX,MaxY,Minefield,Visited,HowManyEmptyField);
-        calculateMines(x,y-1,MaxX,MaxY,Minefield,Visited,HowManyEmptyField);
         calculateMines(x-1,y-1,MaxX,MaxY,Minefield,Visited,HowManyEmptyField);
+        calculateMines(x,y+1,MaxX,MaxY,Minefield,Visited,HowManyEmptyField);
+        calculateMines(x,y-1,MaxX,MaxY,Minefield,Visited,HowManyEmptyField);
         
             
         
