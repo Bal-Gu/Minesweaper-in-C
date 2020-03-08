@@ -3,17 +3,21 @@
 #include <stdlib.h>
 #include <time.h>
 
-void randomFill(int amount,int MaxX,int MaxY,int** mineField){
-    srand((unsigned) time(NULL));
-    for(int i = 0; i < amount;i++){
+void randomFill(int amount, int MaxX, int MaxY, int **mineField)
+{
+    srand((unsigned)time(NULL));
+    for (int i = 0; i < amount; i++)
+    {
         int x = rand() % MaxX;
         int y = rand() % MaxY;
-        if(mineField[x][y] == 1){
+        if (mineField[x][y] == 1)
+        {
             i--;
         }
-        else{
+        else
+        {
             mineField[x][y] = 1;
         }
     }
-    return;   
+    return;
 }

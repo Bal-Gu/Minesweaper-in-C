@@ -22,7 +22,6 @@ int calculateLeft(int x, int **Minefield)
 int calculateRight(int x, int y, int **Minefield)
 {
     return Minefield[x + 1][y] + Minefield[x - 1][y] + Minefield[x - 1][y - 1] + Minefield[x][y - 1] + Minefield[x + 1][y - 1];
-    ;
 }
 int calculateBottom(int x, int y, int **Minefield)
 {
@@ -58,12 +57,8 @@ void calculateMines(int x, int y, int MaxX, int MaxY, int **Minefield, char **Vi
     {
         HowManyEmptyField[0] = HowManyEmptyField[0] + 1;
     }
-<<<<<<< HEAD
-    if (Visited[x][y] >= '0' && Visited[x][y] <= '9' || Visited[x][y] == ' ')
+    if ((Visited[x][y] >= '0' && Visited[x][y] <= '9') || (Visited[x][y] == ' '))
     {
-=======
-    if((Visited[x][y] >= '0' && Visited[x][y] <= '9') || (Visited[x][y] == ' ')){
->>>>>>> 5caf62ab22731b38a85ebb02825e7cb9af1f0a52
         return;
     }
     int returnValue = 0;
@@ -194,6 +189,4 @@ void calculateMines(int x, int y, int MaxX, int MaxY, int **Minefield, char **Vi
             calculateMines(x, y - 1, MaxX, MaxY, Minefield, Visited, HowManyEmptyField);
         }
     }
-
-    return;
 }
