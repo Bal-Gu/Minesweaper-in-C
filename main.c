@@ -34,7 +34,15 @@ int** createMineField(long x, long y){
 
 }
 void rules(){
-    //TODO
+    puts("Hello dear friends let's take a seat.");
+    puts( "you will now start in our world.");
+	puts("You will have to select the X and Y coordinates to gives us your coordinates.");
+	puts("X is on top and Y is on the left side.");
+	puts("Eventhough you can play up to 99x99 size the terminal would mostly supports only 70x70 excepted if you have a large screan.");
+	puts("If you want to mark a mine press X after the coordinates otherwise press any random char.");
+	puts("The game will finish when you found all non mine fields.");
+	puts("The number inside a square is the number of mines it has arround it.");
+	
     return;
 }
 

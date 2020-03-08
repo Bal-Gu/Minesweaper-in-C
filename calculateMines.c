@@ -58,8 +58,12 @@ void calculateMines(int x, int y, int MaxX, int MaxY, int **Minefield, char **Vi
     {
         HowManyEmptyField[0] = HowManyEmptyField[0] + 1;
     }
+<<<<<<< HEAD
     if (Visited[x][y] >= '0' && Visited[x][y] <= '9' || Visited[x][y] == ' ')
     {
+=======
+    if((Visited[x][y] >= '0' && Visited[x][y] <= '9') || (Visited[x][y] == ' ')){
+>>>>>>> 5caf62ab22731b38a85ebb02825e7cb9af1f0a52
         return;
     }
     int returnValue = 0;
