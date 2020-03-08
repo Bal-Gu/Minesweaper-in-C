@@ -44,7 +44,7 @@ void calculateMines(int x,int y,int MaxX,int MaxY,int** Minefield,char** Visited
     if(Visited[x][y] == '#'){
     HowManyEmptyField[0] = HowManyEmptyField[0] + 1;
     }
-    if(Visited[x][y] >= '0' && Visited[x][y] <= '9' || Visited[x][y] == ' '){
+    if((Visited[x][y] >= '0' && Visited[x][y] <= '9') || (Visited[x][y] == ' ')){
         return;
     }
     int returnValue = 0;
