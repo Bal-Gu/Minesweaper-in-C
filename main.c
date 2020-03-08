@@ -89,7 +89,7 @@ while(!GameOver){
     emptybuff();
     
     
-    if(UserX < 0 || UserX > x || UserY < 0 || UserY > y){
+    if(UserX < 0 || UserX >= x || UserY < 0 || UserY >= y){
         puts("please give valid coordinates");
     }
     else if(marking == 'X'){
