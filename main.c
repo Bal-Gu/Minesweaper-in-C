@@ -6,6 +6,26 @@
 #include "randomfill.h"
 #include "emptybuff.h"
 
+void freeUs(int **MineField, char **PlayerView, int *ret, int x)
+{
+    for (int i = 0; i < x; i++)
+    {
+        int *freeMe = MineField[i];
+        free(freeMe);
+    }
+    free(MineField);
+    for (int i = 0; i < x; i++)
+    {
+        char *freeMe = PlayerView[i];
+        free(freeMe);
+    }
+    free(PlayerView);
+    free(ret);
+    PlayerView = NULL;
+    MineField = NULL;
+    ret = NULL;
+}
+
 char **createPlayerView(long x, long y)
 {
 
@@ -80,7 +100,7 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    rules();                                    //TODO should print out the rules and how to play
+    rules();                                    //should print out the rules and how to play
     char **PlayerView = createPlayerView(x, y); //mallocs spaces for the PlayerView
     int **MineField = createMineField(x, y);    //mallocs space for the MineField
     randomFill(minesNum, x, y, MineField);
@@ -93,7 +113,7 @@ int main(int argc, char *argv[])
     while (!GameOver)
     {
         marking = '0';
-        creation(x, y, PlayerView); //TODO in creation
+        creation(x, y, PlayerView);
 
         printf("Gives me your coordinates x y .\n");
         scanf("%d %d", &UserY, &UserX);
@@ -115,29 +135,13 @@ int main(int argc, char *argv[])
         {
             puts("You have steped on a mine\n");
             results(MineField, x, y);
-            for (int i = 0; i < x; i++)
-            {
-                int *freeMe = MineField[i];
-                free(freeMe);
-            }
-            free(MineField);
-            for (int i = 0; i < x; i++)
-            {
-                char *freeMe = PlayerView[i];
-                free(freeMe);
-            }
-            free(PlayerView);
-            free(ret);
-            PlayerView = NULL;
-            MineField = NULL;
-            ret = NULL;
-
+            freeUs(MineField, PlayerView, ret, x);
             return 1;
         }
         else
         {
             ret[0] = 0;
-            calculateMines(UserX, UserY, (int)x - 1, (int)y - 1, MineField, PlayerView, ret); //TODO in CalculatesMines
+            calculateMines(UserX, UserY, (int)x - 1, (int)y - 1, MineField, PlayerView, ret);
             emptyspaces -= ret[0];
             if (emptyspaces == 0)
             {
@@ -148,22 +152,6 @@ int main(int argc, char *argv[])
 
     puts("Congratulation You have won\n");
     results(MineField, x, y);
-
-    for (int i = 0; i < x; i++)
-    {
-        int *freeMe = MineField[i];
-        free(freeMe);
-    }
-    free(MineField);
-    for (int i = 0; i < x; i++)
-    {
-        char *freeMe = PlayerView[i];
-        free(freeMe);
-    }
-    free(PlayerView);
-    free(ret);
-    PlayerView = NULL;
-    MineField = NULL;
-    ret = NULL;
+    freeUs(MineField, PlayerView, ret, x);
     return 0;
 }
